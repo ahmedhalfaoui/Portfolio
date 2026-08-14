@@ -34,10 +34,19 @@ rendu → retouche. Ton : réactif, rigoureux, délais tenus. Pas d'emoji.
   (en attente du nom de compte/repo)
 
 ## À faire
-- [ ] Remplacer les 6 planches SVG par de vraies images de rendus
 - [ ] Vraies coordonnées (email, téléphone) — actuellement placeholders
+- [ ] Vérifier les infos des cartouches (outils/années inventés, à corriger par Ahmed)
 - [ ] Créer le repo GitHub côté client + ajouter la clé publique
 - [ ] Premier push une fois le remote connu
+
+## Fait (2026-08-14, suite)
+- 6 vrais rendus intégrés (`assets/projets/`, sources dans ~/Downloads :
+  Villa1/Villa 2/danklou 2/Cuisine/Chambre1/Cabine2.png — attention,
+  Villa1.png = villa brique/bassin, Villa 2.png = villa blanche)
+- RGPD : consentement obligatoire + section #confidentialite + lien footer
+- Anti-spam : honeypot `_gotcha` + filtre de domaines suspects (bit.ly,
+  tinyurl…) + limite de liens + mots-clés — dans script.js
+- Responsive mobile testé à 375px (boutons pleine largeur, cartouche 1 col)
 
 ## Serveur de dev
 `npx serve -l 4173 .` (config dans `.claude/launch.json`)

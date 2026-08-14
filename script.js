@@ -107,6 +107,13 @@
   var bouton = formulaire.querySelector(".btn-envoyer");
   var texteBouton = bouton.querySelector("span");
 
+  var caseConsentement = formulaire.querySelector("#consentement");
+  if (caseConsentement) {
+    caseConsentement.addEventListener("change", function () {
+      caseConsentement.closest(".consentement").classList.remove("invalide");
+    });
+  }
+
   function afficherStatut(message, type) {
     statut.textContent = message;
     statut.classList.remove("succes", "erreur");
@@ -116,6 +123,11 @@
   function validerChamps() {
     var valide = true;
     formulaire.querySelectorAll("[required]").forEach(function (champ) {
+      if (champ.type === "checkbox") {
+        champ.closest(".consentement").classList.toggle("invalide", !champ.checked);
+        if (!champ.checked) valide = false;
+        return;
+      }
       var vide = !champ.value.trim();
       var emailInvalide = champ.type === "email" && champ.value.trim() && !champ.checkValidity();
       champ.classList.toggle("invalide", vide || emailInvalide);
@@ -124,11 +136,69 @@
     return valide;
   }
 
+  // ---- Protection anti-spam : liens suspects connus ----
+  // Raccourcisseurs et domaines fréquemment utilisés dans les messages
+  // indésirables ; les URL du message sont comparées à cette liste.
+  var DOMAINES_SUSPECTS = [
+    "bit.ly", "tinyurl.com", "goo.gl", "t.co", "cutt.ly", "is.gd",
+    "rb.gy", "shorturl.at", "ow.ly", "buff.ly", "t.ly", "v.gd",
+    "clck.ru", "lnkiy.com", "u.to", "s.id", "tiny.cc", "qps.ru"
+  ];
+
+  var MOTIFS_SPAM = /(viagra|casino en ligne|crypto\s?invest|gagner de l'argent rapidement|seo backlinks|escort)/i;
+
+  function detecterSpam() {
+    var texte = [
+      formulaire.querySelector("#message").value,
+      formulaire.querySelector("#nom").value
+    ].join(" ");
+
+    // pot de miel rempli = robot
+    var piege = formulaire.querySelector('[name="_gotcha"]');
+    if (piege && piege.value.trim()) {
+      return "Votre message n'a pas pu être envoyé.";
+    }
+
+    // extraction des liens du message
+    var liens = texte.match(/https?:\/\/[^\s"'<>]+/gi) || [];
+
+    if (liens.length > 3) {
+      return "Trop de liens dans le message — merci d'en retirer et de réessayer.";
+    }
+
+    for (var i = 0; i < liens.length; i++) {
+      var hote;
+      try {
+        hote = new URL(liens[i]).hostname.replace(/^www\./, "").toLowerCase();
+      } catch (err) {
+        continue;
+      }
+      var suspect = DOMAINES_SUSPECTS.some(function (domaine) {
+        return hote === domaine || hote.endsWith("." + domaine);
+      });
+      if (suspect) {
+        return "Un lien de votre message (" + hote + ") n'est pas accepté — merci d'utiliser un lien direct.";
+      }
+    }
+
+    if (MOTIFS_SPAM.test(texte)) {
+      return "Votre message a été détecté comme indésirable. Reformulez-le ou écrivez-nous directement par email.";
+    }
+
+    return null;
+  }
+
   formulaire.addEventListener("submit", function (e) {
     e.preventDefault();
 
     if (!validerChamps()) {
-      afficherStatut("Merci de remplir les champs obligatoires (nom, email et message).", "erreur");
+      afficherStatut("Merci de remplir les champs obligatoires et d'accepter la politique de confidentialité.", "erreur");
+      return;
+    }
+
+    var motifSpam = detecterSpam();
+    if (motifSpam) {
+      afficherStatut(motifSpam, "erreur");
       return;
     }
 
