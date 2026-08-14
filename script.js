@@ -182,7 +182,7 @@
     }
 
     if (MOTIFS_SPAM.test(texte)) {
-      return "Votre message a été détecté comme indésirable. Reformulez-le ou écrivez-nous directement par email.";
+      return "Votre message a été détecté comme indésirable. Reformulez-le puis réessayez.";
     }
 
     return null;
