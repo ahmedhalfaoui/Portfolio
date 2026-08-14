@@ -524,20 +524,7 @@ a { color: inherit; }
 
 .hero .btn-ghost:hover { color: var(--indigo); }
 
-.btn-envoyer {
-  background: var(--encre);
-  border-color: var(--encre);
-  color: var(--papier);
-  align-self: flex-start;
-}
-
-.btn-envoyer:hover { color: var(--craie); }
-
-.btn-envoyer::before { background: var(--bleu); }
-
-.btn-envoyer:hover { border-color: var(--bleu); }
-
-.btn-envoyer[disabled] { opacity: 0.55; cursor: wait; }
+/* (le bouton d'envoi du formulaire a son propre style « bling », plus bas) */
 
 /* ==========================================================================
    Sections
@@ -863,69 +850,263 @@ a { color: inherit; }
 .contact-coords a { text-decoration: none; transition: color 0.2s; }
 .contact-coords a:hover { color: var(--bleu); text-decoration: underline; }
 
-/* ---- Formulaire ---- */
+/* ---- Formulaire « bling » : verre dépoli, bordure dégradée, halos ---- */
 
-.contact-form {
-  border: 1px solid var(--encre);
-  background: var(--surface);
-  padding: clamp(1.5rem, 3vw, 2.25rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  box-shadow: 10px 10px 0 0 color-mix(in srgb, var(--bleu) 16%, transparent);
+/* halo lumineux animé derrière la carte */
+.form-halo {
+  position: relative;
+  isolation: isolate;
 }
 
-.champ { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
+.form-halo::before,
+.form-halo::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.form-halo::before {
+  width: 22rem;
+  height: 22rem;
+  top: -4rem;
+  right: -5rem;
+  background: radial-gradient(circle, var(--bleu-vif), transparent 65%);
+  animation: halo-flotte 9s ease-in-out infinite alternate;
+}
+
+.form-halo::after {
+  width: 16rem;
+  height: 16rem;
+  bottom: -3rem;
+  left: -4rem;
+  background: radial-gradient(circle, var(--indigo), transparent 65%);
+  animation: halo-flotte 11s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes halo-flotte {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-1.5rem, 1.5rem) scale(1.12); }
+}
+
+/* carte en verre dépoli, bordure dégradée aux couleurs du logo */
+.contact-form {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--surface) 78%, transparent),
+      color-mix(in srgb, var(--surface) 78%, transparent)
+    ) padding-box,
+    linear-gradient(140deg,
+      color-mix(in srgb, var(--bleu-vif) 85%, transparent),
+      color-mix(in srgb, var(--bleu-vif) 15%, transparent) 40%,
+      color-mix(in srgb, var(--indigo) 70%, transparent)
+    ) border-box;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: clamp(1.6rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  box-shadow:
+    0 24px 60px -24px color-mix(in srgb, var(--bleu-vif) 45%, transparent),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+}
+
+.form-entete {
+  color: var(--bleu);
+  letter-spacing: 0.2em;
+}
+
+.champ { position: relative; display: flex; flex-direction: column; flex: 1; }
 
 .champ-rangee { display: flex; gap: 1.2rem; }
 
-.champ label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.optionnel { color: var(--beton); text-transform: none; letter-spacing: 0.04em; }
-
+/* champs : surfaces douces, coins arrondis, anneau lumineux au focus */
 .champ input,
 .champ select,
 .champ textarea {
   font-family: var(--font-body);
   font-size: 1rem;
   color: var(--encre);
-  background: var(--papier);
-  border: 1px solid var(--filet);
-  border-bottom: 2px solid var(--encre);
-  padding: 0.7rem 0.8rem;
-  border-radius: 0;
+  background: color-mix(in srgb, var(--papier) 65%, transparent);
+  border: 1px solid color-mix(in srgb, var(--filet) 80%, transparent);
+  border-radius: 14px;
+  padding: 1.35rem 1.1rem 0.65rem;
   transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
 }
 
-.champ textarea { resize: vertical; min-height: 7rem; }
+.champ select {
+  padding: 1rem 2.8rem 1rem 1.1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.champ textarea { resize: vertical; min-height: 8rem; }
+
+.champ input:hover,
+.champ select:hover,
+.champ textarea:hover {
+  border-color: color-mix(in srgb, var(--bleu) 45%, transparent);
+}
 
 .champ input:focus,
 .champ select:focus,
 .champ textarea:focus {
   outline: none;
-  border-color: var(--bleu);
-  border-bottom-color: var(--bleu);
+  border-color: var(--bleu-vif);
   background: var(--surface);
-  box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--bleu) 40%, transparent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--bleu-vif) 18%, transparent),
+    0 10px 30px -12px color-mix(in srgb, var(--bleu-vif) 45%, transparent);
 }
+
+/* labels flottants */
+.champ-flottant label {
+  position: absolute;
+  top: 1rem;
+  left: 1.1rem;
+  font-size: 1rem;
+  color: var(--beton);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform 0.22s var(--sortie), color 0.22s;
+}
+
+.champ-flottant input:focus ~ label,
+.champ-flottant input:not(:placeholder-shown) ~ label,
+.champ-flottant textarea:focus ~ label,
+.champ-flottant textarea:not(:placeholder-shown) ~ label {
+  transform: translateY(-0.55rem) scale(0.68);
+  letter-spacing: 0.06em;
+  color: var(--bleu);
+}
+
+.optionnel { font-size: 0.85em; }
+
+/* select : petit label mono au-dessus + chevron dessiné */
+.champ-select { gap: 0.5rem; }
+
+.champ-select label { color: var(--bleu); }
+
+.champ-select::after {
+  content: "";
+  position: absolute;
+  right: 1.15rem;
+  bottom: 1.45rem;
+  width: 9px;
+  height: 9px;
+  border-right: 1.8px solid var(--beton);
+  border-bottom: 1.8px solid var(--beton);
+  transform: rotate(45deg);
+  pointer-events: none;
+  transition: border-color 0.25s;
+}
+
+.champ-select:focus-within::after { border-color: var(--bleu-vif); }
 
 .champ input.invalide,
-.champ textarea.invalide { border-bottom-color: #A63232; }
-
-.form-statut {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  min-height: 1.2rem;
+.champ textarea.invalide {
+  border-color: #D06060;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #D06060 14%, transparent);
 }
 
-.form-statut.succes { color: #1F6B3A; }
-.form-statut.erreur { color: #A63232; }
+/* bouton : dégradé du logo, halo, éclat balayé au survol */
+.btn-envoyer {
+  position: relative;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(120deg, var(--bleu-vif), var(--indigo) 120%);
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 1.9rem;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow:
+    0 14px 34px -12px color-mix(in srgb, var(--bleu-vif) 65%, transparent),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.25s var(--sortie), box-shadow 0.25s var(--sortie);
+}
+
+.btn-envoyer svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.25s var(--sortie);
+}
+
+.btn-envoyer:hover,
+.btn-envoyer:focus-visible {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 44px -12px color-mix(in srgb, var(--bleu-vif) 75%, transparent),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+}
+
+.btn-envoyer:hover svg { transform: translateX(4px); }
+
+.btn-envoyer:active { transform: translateY(0); }
+
+/* éclat qui balaie le bouton */
+.btn-envoyer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 70%);
+  transform: translateX(-120%);
+}
+
+.btn-envoyer:hover::after {
+  animation: eclat 0.8s var(--sortie);
+}
+
+@keyframes eclat {
+  to { transform: translateX(120%); }
+}
+
+.btn-envoyer[disabled] {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+/* statut : pastille teintée */
+.form-statut {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  min-height: 1.2rem;
+  border-radius: 10px;
+  transition: background 0.3s, padding 0.3s;
+}
+
+.form-statut.succes,
+.form-statut.erreur { padding: 0.7rem 1rem; }
+
+.form-statut.succes {
+  color: #1F6B3A;
+  background: color-mix(in srgb, #2FA35C 14%, transparent);
+}
+
+.form-statut.erreur {
+  color: #A63232;
+  background: color-mix(in srgb, #D06060 14%, transparent);
+}
 
 /* ==========================================================================
    Pied de page
@@ -1031,6 +1212,10 @@ a { color: inherit; }
   .drawing-label { animation: none; opacity: 1; }
 
   .hero-grid-bg, .marquee-piste { animation: none; }
+
+  .form-halo::before, .form-halo::after, .btn-envoyer::after { animation: none; }
+
+  .btn-envoyer, .champ-flottant label { transition: none; }
 
   .reveal { opacity: 1; transform: none; transition: none; }
 

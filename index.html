@@ -432,41 +432,47 @@
         </dl>
       </div>
 
-      <form class="contact-form reveal" id="formulaire-contact" action="https://formspree.io/f/xjyboozp" method="POST" novalidate>
-        <div class="champ">
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" autocomplete="name" required>
-        </div>
-        <div class="champ-rangee">
-          <div class="champ">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </div>
-          <div class="champ">
-            <label for="telephone">Téléphone <span class="optionnel mono">(facultatif)</span></label>
-            <input type="tel" id="telephone" name="telephone" autocomplete="tel">
-          </div>
-        </div>
-        <div class="champ">
-          <label for="type-projet">Type de prestation</label>
-          <select id="type-projet" name="type_de_prestation">
-            <option value="Rendu extérieur">Rendu extérieur</option>
-            <option value="Rendu intérieur">Rendu intérieur</option>
-            <option value="Animation / visite virtuelle">Animation / visite virtuelle</option>
-            <option value="Concours / permis de construire">Concours / permis de construire</option>
-            <option value="Plans et documents">Plans et documents</option>
-            <option value="Autre">Autre</option>
-          </select>
-        </div>
-        <div class="champ">
-          <label for="message">Votre projet</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
+      <div class="form-halo reveal">
+        <form class="contact-form" id="formulaire-contact" action="https://formspree.io/f/xjyboozp" method="POST" novalidate>
+          <p class="form-entete mono">Demande de projet — réponse rapide</p>
 
-        <button type="submit" class="btn btn-solid btn-envoyer"><span>Envoyer le message</span></button>
+          <div class="champ champ-flottant">
+            <input type="text" id="nom" name="nom" autocomplete="name" placeholder=" " required>
+            <label for="nom">Nom</label>
+          </div>
+          <div class="champ-rangee">
+            <div class="champ champ-flottant">
+              <input type="email" id="email" name="email" autocomplete="email" placeholder=" " required>
+              <label for="email">Email</label>
+            </div>
+            <div class="champ champ-flottant">
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder=" ">
+              <label for="telephone">Téléphone <span class="optionnel">(facultatif)</span></label>
+            </div>
+          </div>
+          <div class="champ champ-select">
+            <label for="type-projet" class="mono">Type de prestation</label>
+            <select id="type-projet" name="type_de_prestation">
+              <option value="Rendu extérieur">Rendu extérieur</option>
+              <option value="Rendu intérieur">Rendu intérieur</option>
+              <option value="Animation / visite virtuelle">Animation / visite virtuelle</option>
+              <option value="Concours / permis de construire">Concours / permis de construire</option>
+              <option value="Plans et documents">Plans et documents</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <div class="champ champ-flottant">
+            <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+            <label for="message">Votre projet</label>
+          </div>
 
-        <p class="form-statut" role="status" aria-live="polite"></p>
-      </form>
+          <button type="submit" class="btn-envoyer"><span>Envoyer le message</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+
+          <p class="form-statut" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </div>
   </section>
 
