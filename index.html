@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halfaoui Ahmed — Architecte &amp; ArchViz</title>
+  <meta name="description" content="Halfaoui Ahmed, architecte et spécialiste en visualisation architecturale (ArchViz). Rendus 3D photoréalistes, animations, visites virtuelles, visuels de concours et permis de construire.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/logo-256.png">
+  <script>
+    // Applique le thème avant le premier rendu pour éviter tout flash
+    (function () {
+      var theme = localStorage.getItem("theme");
+      if (!theme) {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "sombre" : "clair";
+      }
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="progression" aria-hidden="true"><span></span></div>
+
+  <!-- ================= NAVIGATION ================= -->
+  <header class="nav" id="haut">
+    <a class="nav-brand" href="#haut">
+      <img class="nav-logo" src="assets/logo-256.png" alt="" width="40" height="40">
+      <span class="nav-brand-texte">
+        <span class="nav-brand-name">HALFAOUI&nbsp;AHMED</span>
+        <span class="nav-brand-role">architecte · archviz</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#realisations">Réalisations</a>
+      <a href="#livrables">Livrables</a>
+      <a href="#processus">Processus</a>
+      <a href="#outils">Outils</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+    <div class="nav-outils">
+      <button class="theme-toggle" aria-label="Basculer en mode sombre" title="Basculer le thème">
+        <svg class="icone-lune" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M 20 14 A 8.5 8.5 0 1 1 10 4 A 7 7 0 0 0 20 14 Z"/>
+        </svg>
+        <svg class="icone-soleil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5"/>
+          <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/>
+        </svg>
+      </button>
+      <button class="nav-burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= HÉROS ================= -->
+  <section class="hero">
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow mono anim anim-1">Visualisation architecturale — Rendus 3D photoréalistes</p>
+
+      <h1 class="hero-title">
+        <span class="mask"><span class="hero-line anim-titre anim-2">HALFAOUI</span></span>
+        <span class="mask"><span class="hero-line anim-titre anim-3">AHMED</span></span>
+      </h1>
+
+      <!-- Cote de dimension sous le nom -->
+      <div class="cote anim anim-4" aria-hidden="true">
+        <span class="cote-tick"></span>
+        <span class="cote-line"></span>
+        <span class="cote-label mono">ARCHITECTE — SPÉCIALISTE ARCHVIZ</span>
+        <span class="cote-line"></span>
+        <span class="cote-tick"></span>
+      </div>
+
+      <p class="hero-intro anim anim-5">
+        Un projet à présenter, un concours à remporter, un client à
+        convaincre&nbsp;? Je transforme vos plans en rendus 3D
+        photoréalistes qui font la différence&nbsp;— maisons individuelles,
+        restaurants, bâtiments publics ou dossiers de concours.
+      </p>
+
+      <div class="hero-actions anim anim-6">
+        <a class="btn btn-solid" href="#realisations"><span>Voir les réalisations</span></a>
+        <a class="btn btn-ghost" href="#contact"><span>Parler de votre projet</span></a>
+      </div>
+    </div>
+
+    <!-- Élévation dessinée au trait blanc -->
+    <div class="hero-drawing" data-parallax aria-hidden="true">
+      <svg viewBox="0 0 640 440" fill="none" preserveAspectRatio="xMidYMax meet">
+        <g class="draw" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="400" x2="640" y2="400"/>
+          <rect x="80" y="180" width="300" height="220"/>
+          <line x1="70" y1="180" x2="390" y2="180"/>
+          <line x1="70" y1="172" x2="390" y2="172"/>
+          <rect x="380" y="260" width="180" height="140"/>
+          <line x1="372" y1="260" x2="568" y2="260"/>
+          <rect x="110" y="220" width="70" height="100"/>
+          <line x1="145" y1="220" x2="145" y2="320"/>
+          <rect x="210" y="220" width="70" height="100"/>
+          <line x1="245" y1="220" x2="245" y2="320"/>
+          <rect x="310" y="300" width="50" height="100"/>
+          <rect x="405" y="290" width="130" height="40"/>
+          <line x1="470" y1="290" x2="470" y2="330"/>
+          <line x1="300" y1="295" x2="375" y2="295"/>
+          <line x1="600" y1="400" x2="600" y2="330"/>
+          <circle cx="600" cy="305" r="28"/>
+          <g class="drawing-cotes" stroke-width="1">
+            <line x1="80" y1="420" x2="380" y2="420"/>
+            <line x1="80" y1="415" x2="80" y2="425"/>
+            <line x1="380" y1="415" x2="380" y2="425"/>
+            <line x1="60" y1="180" x2="60" y2="400"/>
+            <line x1="55" y1="180" x2="65" y2="180"/>
+            <line x1="55" y1="400" x2="65" y2="400"/>
+          </g>
+        </g>
+        <text class="drawing-label mono" x="230" y="428" text-anchor="middle" dominant-baseline="hanging">12,40 m</text>
+        <text class="drawing-label mono" x="46" y="290" text-anchor="middle" transform="rotate(-90 46 290)">7,20 m</text>
+      </svg>
+    </div>
+
+    <!-- Bandeau défilant : les outils -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-piste">
+        <span class="mono">SketchUp · Blender · D5 Render · Lumion · V-Ray · Revit · AutoCAD · Rhino · Photoshop · Illustrator · InDesign ·&nbsp;</span><span class="mono">SketchUp · Blender · D5 Render · Lumion · V-Ray · Revit · AutoCAD · Rhino · Photoshop · Illustrator · InDesign ·&nbsp;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RÉALISATIONS ================= -->
+  <section class="section" id="realisations">
+    <div class="section-head reveal">
+      <p class="section-eyebrow mono">Planche 02</p>
+      <h2 class="section-title"><span class="mask"><span>Réalisations</span></span></h2>
+      <p class="section-note mono">Emplacements pour vos rendus — remplacez chaque planche par une image finale.</p>
+    </div>
+
+    <div class="planches stagger">
+
+      <article class="planche reveal">
+        <div class="planche-visuel">
+          <svg viewBox="0 0 400 260" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4">
+              <line x1="0" y1="240" x2="400" y2="240"/>
+              <rect x="60" y="90" width="200" height="150"/>
+              <line x1="52" y1="90" x2="268" y2="90"/>
+              <rect x="255" y="150" width="105" height="90"/>
+              <rect x="85" y="120" width="55" height="70"/>
+              <rect x="165" y="120" width="55" height="70"/>
+              <rect x="120" y="180" width="45" height="60"/>
+              <rect x="275" y="175" width="65" height="30"/>
+              <line x1="368" y1="240" x2="368" y2="196"/>
+              <circle cx="368" cy="182" r="16"/>
+            </g>
+          </svg>
+          <span class="planche-num mono">R-01</span>
+        </div>
+        <div class="cartouche">
+          <h3 class="cartouche-titre">Villa contemporaine</h3>
+          <dl class="cartouche-infos mono">
+            <div><dt>Type</dt><dd>Maison individuelle</dd></div>
+            <div><dt>Livrable</dt><dd>Rendu extérieur</dd></div>
+            <div><dt>Outils</dt><dd>SketchUp · D5</dd></div>
+            <div><dt>Année</dt><dd>2024</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="planche reveal">
+        <div class="planche-visuel">
+          <svg viewBox="0 0 400 260" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4">
+              <line x1="0" y1="240" x2="400" y2="240"/>
+              <rect x="50" y="60" width="120" height="180"/>
+              <rect x="170" y="110" width="120" height="130"/>
+              <rect x="290" y="160" width="80" height="80"/>
+              <line x1="70" y1="90" x2="150" y2="90"/>
+              <line x1="70" y1="130" x2="150" y2="130"/>
+              <line x1="70" y1="170" x2="150" y2="170"/>
+              <line x1="70" y1="210" x2="150" y2="210"/>
+              <line x1="190" y1="140" x2="270" y2="140"/>
+              <line x1="190" y1="180" x2="270" y2="180"/>
+              <line x1="190" y1="210" x2="270" y2="210"/>
+              <rect x="305" y="185" width="50" height="30"/>
+            </g>
+          </svg>
+          <span class="planche-num mono">R-02</span>
+        </div>
+        <div class="cartouche">
+          <h3 class="cartouche-titre">Restaurant panoramique</h3>
+          <dl class="cartouche-infos mono">
+            <div><dt>Type</dt><dd>Restaurant</dd></div>
+            <div><dt>Livrable</dt><dd>Rendu intérieur</dd></div>
+            <div><dt>Outils</dt><dd>Blender · V-Ray</dd></div>
+            <div><dt>Année</dt><dd>2024</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="planche reveal">
+        <div class="planche-visuel">
+          <svg viewBox="0 0 400 260" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4">
+              <line x1="0" y1="240" x2="400" y2="240"/>
+              <path d="M 60 240 L 60 140 L 200 80 L 340 140 L 340 240"/>
+              <line x1="60" y1="140" x2="340" y2="140"/>
+              <rect x="90" y="170" width="60" height="70"/>
+              <rect x="250" y="170" width="60" height="70"/>
+              <rect x="175" y="160" width="50" height="80"/>
+              <line x1="200" y1="80" x2="200" y2="60"/>
+            </g>
+          </svg>
+          <span class="planche-num mono">R-03</span>
+        </div>
+        <div class="cartouche">
+          <h3 class="cartouche-titre">Médiathèque municipale</h3>
+          <dl class="cartouche-infos mono">
+            <div><dt>Type</dt><dd>Bâtiment public</dd></div>
+            <div><dt>Livrable</dt><dd>Dossier concours</dd></div>
+            <div><dt>Outils</dt><dd>Revit · Lumion</dd></div>
+            <div><dt>Année</dt><dd>2023</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="planche reveal">
+        <div class="planche-visuel">
+          <svg viewBox="0 0 400 260" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4">
+              <line x1="0" y1="240" x2="400" y2="240"/>
+              <rect x="70" y="120" width="180" height="120"/>
+              <path d="M 70 120 L 160 70 L 250 120"/>
+              <rect x="250" y="160" width="100" height="80"/>
+              <line x1="242" y1="160" x2="358" y2="160"/>
+              <rect x="100" y="160" width="45" height="80"/>
+              <rect x="175" y="150" width="50" height="50"/>
+              <rect x="270" y="180" width="60" height="35"/>
+            </g>
+          </svg>
+          <span class="planche-num mono">R-04</span>
+        </div>
+        <div class="cartouche">
+          <h3 class="cartouche-titre">Extension d'une maison</h3>
+          <dl class="cartouche-infos mono">
+            <div><dt>Type</dt><dd>Habitat</dd></div>
+            <div><dt>Livrable</dt><dd>Permis de construire</dd></div>
+            <div><dt>Outils</dt><dd>AutoCAD · D5</dd></div>
+            <div><dt>Année</dt><dd>2023</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="planche reveal">
+        <div class="planche-visuel">
+          <svg viewBox="0 0 400 260" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4">
+              <line x1="0" y1="240" x2="400" y2="240"/>
+              <rect x="80" y="70" width="240" height="170"/>
+              <line x1="80" y1="110" x2="320" y2="110"/>
+              <line x1="80" y1="150" x2="320" y2="150"/>
+              <line x1="80" y1="190" x2="320" y2="190"/>
+              <line x1="140" y1="70" x2="140" y2="240"/>
+              <line x1="200" y1="70" x2="200" y2="240"/>
+              <line x1="260" y1="70" x2="260" y2="240"/>
+              <rect x="180" y="200" width="40" height="40"/>
+            </g>
+          </svg>
+          <span class="planche-num mono">R-05</span>
+        </div>
+        <div class="cartouche">
+          <h3 class="cartouche-titre">Immeuble de bureaux</h3>
+          <dl class="cartouche-infos mono">
+            <div><dt>Type</dt><dd>Tertiaire</dd></div>
+            <div><dt>Livrable</dt><dd>Animation 3D</dd></div>
+            <div><dt>Outils</dt><dd>Rhino · Lumion</dd></div>
+            <div><dt>Année</dt><dd>2022</dd></div>
+          </dl>
+        </div>
+      </article>
+
+      <article class="planche reveal">
+        <div class="planche-visuel">
+          <svg viewBox="0 0 400 260" fill="none" aria-hidden="true">
+            <g stroke="currentColor" stroke-width="1.4">
+              <line x1="0" y1="240" x2="400" y2="240"/>
+              <rect x="90" y="100" width="220" height="140"/>
+              <path d="M 150 100 A 50 50 0 0 1 250 100"/>
+              <rect x="120" y="140" width="40" height="100"/>
+              <rect x="240" y="140" width="40" height="100"/>
+              <path d="M 180 240 L 180 170 A 20 20 0 0 1 220 170 L 220 240"/>
+            </g>
+          </svg>
+          <span class="planche-num mono">R-06</span>
+        </div>
+        <div class="cartouche">
+          <h3 class="cartouche-titre">Réhabilitation d'un riad</h3>
+          <dl class="cartouche-infos mono">
+            <div><dt>Type</dt><dd>Patrimoine</dd></div>
+            <div><dt>Livrable</dt><dd>Visite virtuelle</dd></div>
+            <div><dt>Outils</dt><dd>Blender · D5</dd></div>
+            <div><dt>Année</dt><dd>2022</dd></div>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= LIVRABLES ================= -->
+  <section class="section section-sombre" id="livrables">
+    <div class="section-head reveal">
+      <p class="section-eyebrow mono">Planche 03</p>
+      <h2 class="section-title"><span class="mask"><span>Ce que je livre</span></span></h2>
+    </div>
+
+    <ul class="livrables stagger">
+      <li class="livrable reveal">
+        <h3>Rendus extérieurs &amp; intérieurs photoréalistes</h3>
+        <p>Des images de synthèse fidèles à vos matériaux, votre lumière et
+        votre site, prêtes pour vos présentations clients.</p>
+      </li>
+      <li class="livrable reveal">
+        <h3>Animations et visites virtuelles</h3>
+        <p>Des parcours immersifs qui font vivre le projet avant sa
+        construction, pour convaincre en quelques minutes.</p>
+      </li>
+      <li class="livrable reveal">
+        <h3>Visuels pour concours et permis de construire</h3>
+        <p>Perspectives d'insertion, planches et images réglementaires qui
+        valorisent votre dossier auprès du jury et de l'administration.</p>
+      </li>
+      <li class="livrable reveal">
+        <h3>Plans et documents de présentation</h3>
+        <p>Plans mis au propre, coupes, axonométries et mises en page
+        soignées pour un dossier cohérent de bout en bout.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ================= PROCESSUS ================= -->
+  <section class="section" id="processus">
+    <div class="section-head reveal">
+      <p class="section-eyebrow mono">Planche 04</p>
+      <h2 class="section-title"><span class="mask"><span>Le processus</span></span></h2>
+      <p class="section-lead reveal">Je prends en charge l'ensemble de la
+      chaîne, de vos plans bruts à l'image finale. Réactif, rigoureux,
+      livraison dans les délais — même sur des projets urgents.</p>
+    </div>
+
+    <ol class="services stagger">
+      <li class="service reveal">
+        <h3>Modélisation</h3>
+        <p>Vos plans 2D ou maquettes BIM deviennent un modèle 3D précis,
+        à l'échelle, prêt pour la mise en scène.</p>
+      </li>
+      <li class="service reveal">
+        <h3>Mise en scène &amp; éclairage</h3>
+        <p>Cadrages, matériaux, végétation, personnages et lumière
+        naturelle ou artificielle&nbsp;: chaque image raconte le projet.</p>
+      </li>
+      <li class="service reveal">
+        <h3>Rendu architectural</h3>
+        <p>Calcul des images finales en haute définition, extérieures et
+        intérieures, fixes ou animées.</p>
+      </li>
+      <li class="service reveal">
+        <h3>Retouche &amp; livraison</h3>
+        <p>Post-production, colorimétrie et intégration dans vos planches,
+        livrées aux formats dont vous avez besoin, dans les délais.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================= OUTILS ================= -->
+  <section class="section section-sombre" id="outils">
+    <div class="section-head reveal">
+      <p class="section-eyebrow mono">Planche 05</p>
+      <h2 class="section-title"><span class="mask"><span>Les outils</span></span></h2>
+    </div>
+
+    <div class="outils-groupes stagger">
+      <div class="outils-groupe reveal">
+        <p class="outils-label mono">Modélisation &amp; CAO</p>
+        <ul class="outils-liste">
+          <li>SketchUp</li>
+          <li>Blender</li>
+          <li>Revit</li>
+          <li>AutoCAD</li>
+          <li>Rhino</li>
+        </ul>
+      </div>
+      <div class="outils-groupe reveal">
+        <p class="outils-label mono">Rendu</p>
+        <ul class="outils-liste">
+          <li>D5 Render</li>
+          <li>Lumion</li>
+          <li>V-Ray</li>
+        </ul>
+      </div>
+      <div class="outils-groupe reveal">
+        <p class="outils-label mono">Post-production</p>
+        <ul class="outils-liste">
+          <li>Photoshop</li>
+          <li>Illustrator</li>
+          <li>InDesign</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-col reveal">
+        <p class="section-eyebrow mono">Planche 06</p>
+        <h2 class="section-title"><span class="mask"><span>Parlons de votre projet</span></span></h2>
+        <p class="contact-texte">
+          Un rendu à produire, un concours à préparer, un permis à
+          déposer&nbsp;? Décrivez votre besoin en quelques lignes&nbsp;:
+          je vous réponds rapidement, même sur des délais serrés.
+        </p>
+        <dl class="contact-coords mono">
+          <div><dt>Email</dt><dd><a href="mailto:contact@halfaoui-archviz.com">contact@halfaoui-archviz.com</a></dd></div>
+          <div><dt>Téléphone</dt><dd><a href="tel:+21600000000">+216 00 000 000</a></dd></div>
+          <div><dt>Studio</dt><dd>Tunis</dd></div>
+        </dl>
+      </div>
+
+      <form class="contact-form reveal" id="formulaire-contact" action="https://formspree.io/f/xjyboozp" method="POST" novalidate>
+        <div class="champ">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" autocomplete="name" required>
+        </div>
+        <div class="champ-rangee">
+          <div class="champ">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="champ">
+            <label for="telephone">Téléphone <span class="optionnel mono">(facultatif)</span></label>
+            <input type="tel" id="telephone" name="telephone" autocomplete="tel">
+          </div>
+        </div>
+        <div class="champ">
+          <label for="type-projet">Type de prestation</label>
+          <select id="type-projet" name="type_de_prestation">
+            <option value="Rendu extérieur">Rendu extérieur</option>
+            <option value="Rendu intérieur">Rendu intérieur</option>
+            <option value="Animation / visite virtuelle">Animation / visite virtuelle</option>
+            <option value="Concours / permis de construire">Concours / permis de construire</option>
+            <option value="Plans et documents">Plans et documents</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+        <div class="champ">
+          <label for="message">Votre projet</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-solid btn-envoyer"><span>Envoyer le message</span></button>
+
+        <p class="form-statut" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= PIED DE PAGE ================= -->
+  <footer class="footer">
+    <div class="cote cote-footer" aria-hidden="true">
+      <span class="cote-tick"></span>
+      <span class="cote-line"></span>
+      <span class="cote-label mono">FIN DE PLANCHE</span>
+      <span class="cote-line"></span>
+      <span class="cote-tick"></span>
+    </div>
+    <p class="footer-texte mono">© <span id="annee">2026</span> Halfaoui Ahmed — Architecte &amp; ArchViz. Tous droits réservés.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1038 @@
+/* ==========================================================================
+   Portfolio Halfaoui Ahmed — Architecte & ArchViz · v3
+   Palette dérivée du logo : indigo profond → bleu vif, blanc
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+  --papier: #F5F5F2;
+  --papier-fonce: #ECEDEA;
+  --encre: #14151C;
+
+  /* couleurs du logo */
+  --bleu: #2352DB;              /* accent sur fond clair */
+  --bleu-vif: #2563F0;          /* haut du dégradé logo */
+  --indigo: #1B1464;            /* bas du dégradé logo */
+  --degrade-logo: linear-gradient(225deg, var(--bleu-vif) 0%, var(--indigo) 100%);
+
+  --craie: #FFFFFF;
+  --craie-douce: rgba(255, 255, 255, 0.65);
+  --trame: rgba(255, 255, 255, 0.10);
+  --beton: #8A8D93;
+  --filet: #D8D9D4;
+  --filet-grille: #E7E8E2;
+
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --surface: #FFFFFF;
+
+  --marge: clamp(1.25rem, 5vw, 5rem);
+  --largeur-max: 78rem;
+
+  --sortie: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- Mode sombre : mêmes teintes que le logo, en profondeur ---- */
+
+:root[data-theme="sombre"] {
+  color-scheme: dark;
+  --papier: #0E0C24;
+  --papier-fonce: #131030;
+  --encre: #ECEEF8;
+
+  --bleu: #6089FF;
+  --bleu-vif: #2563F0;
+  --indigo: #1B1464;
+
+  --beton: #8E92A8;
+  --filet: #2A2752;
+  --filet-grille: #1C1940;
+  --surface: #16133A;
+}
+
+:root[data-theme="sombre"] body { background: var(--papier); }
+
+:root[data-theme="sombre"] .form-statut.succes { color: #6FCB91; }
+:root[data-theme="sombre"] .form-statut.erreur { color: #E58585; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--papier);
+  color: var(--encre);
+  line-height: 1.6;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--bleu); color: var(--craie); }
+
+:focus-visible {
+  outline: 2px solid var(--bleu);
+  outline-offset: 3px;
+}
+
+.mask { display: block; overflow: hidden; }
+
+/* ==========================================================================
+   Barre de progression de lecture
+   ========================================================================== */
+
+.progression {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.progression span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--degrade-logo);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem var(--marge);
+  background: color-mix(in srgb, var(--papier) 90%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--filet);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  line-height: 1.15;
+}
+
+.nav-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.nav-brand-texte { display: flex; flex-direction: column; }
+
+.nav-brand-name {
+  font-family: var(--font-display);
+  font-stretch: 115%;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.nav-brand-role {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bleu);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.6vw, 2rem);
+}
+
+.nav-links a {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.25rem 0;
+  transition: color 0.25s;
+}
+
+/* soulignement animé */
+.nav-links a:not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--bleu);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--sortie);
+}
+
+.nav-links a:not(.nav-cta):hover { color: var(--bleu); }
+
+.nav-links a:not(.nav-cta):hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-links .nav-cta {
+  border: 1px solid var(--encre);
+  padding: 0.45rem 1rem;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.nav-links .nav-cta:hover {
+  background: var(--bleu);
+  border-color: var(--bleu);
+  color: var(--craie);
+}
+
+.nav-outils {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: 1px solid var(--filet);
+  color: var(--encre);
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, transform 0.25s var(--sortie);
+}
+
+.theme-toggle:hover {
+  border-color: var(--bleu);
+  color: var(--bleu);
+  transform: rotate(15deg);
+}
+
+.theme-toggle svg { width: 18px; height: 18px; }
+
+.theme-toggle .icone-soleil { display: none; }
+
+:root[data-theme="sombre"] .theme-toggle .icone-lune { display: none; }
+:root[data-theme="sombre"] .theme-toggle .icone-soleil { display: block; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-burger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--encre);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+/* ==========================================================================
+   Héros — dégradé du logo
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 65px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: end;
+  column-gap: 2rem;
+  padding: clamp(3rem, 8vh, 6rem) var(--marge) 0;
+  background:
+    radial-gradient(120% 90% at 80% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
+    var(--degrade-logo);
+  color: var(--craie);
+  overflow: hidden;
+}
+
+/* trame de papier millimétré, blanche et discrète */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--trame) 1px, transparent 1px),
+    linear-gradient(90deg, var(--trame) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.25));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.25));
+  pointer-events: none;
+  animation: trame-derive 40s linear infinite;
+}
+
+@keyframes trame-derive {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 0 56px, 56px 0; }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding-bottom: clamp(3.5rem, 9vh, 6rem);
+  max-width: 40rem;
+}
+
+.hero-eyebrow {
+  color: var(--craie-douce);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-stretch: 122%;
+  font-weight: 800;
+  font-size: clamp(3rem, 9vw, 6.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--craie);
+}
+
+.hero-line { display: block; }
+
+.hero-intro {
+  max-width: 33rem;
+  margin-top: 1.75rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--craie-douce);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.25rem;
+}
+
+/* ---- Animations d'entrée du héros ---- */
+
+.anim {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: entree 0.9s var(--sortie) forwards;
+}
+
+.anim-titre {
+  display: block;
+  transform: translateY(110%);
+  animation: entree-titre 1s var(--sortie) forwards;
+}
+
+.anim-1 { animation-delay: 0.15s; }
+.anim-2 { animation-delay: 0.30s; }
+.anim-3 { animation-delay: 0.42s; }
+.anim-4 { animation-delay: 0.75s; }
+.anim-5 { animation-delay: 0.90s; }
+.anim-6 { animation-delay: 1.05s; }
+
+@keyframes entree {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes entree-titre {
+  to { transform: translateY(0); }
+}
+
+/* ---- Cote de dimension (signature) ---- */
+
+.cote {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+  color: var(--craie);
+}
+
+.cote-line {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  min-width: 1.5rem;
+}
+
+.cote-tick {
+  width: 1px;
+  height: 14px;
+  background: currentColor;
+  position: relative;
+}
+
+.cote-tick::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cote-label {
+  white-space: nowrap;
+  letter-spacing: 0.18em;
+}
+
+.footer .cote { color: var(--bleu); }
+
+/* ---- Dessin d'élévation ---- */
+
+.hero-drawing {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  color: var(--craie);
+  will-change: transform;
+}
+
+.hero-drawing svg { width: 100%; height: auto; display: block; }
+
+.draw line,
+.draw rect,
+.draw circle,
+.draw path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: tracer 2.6s var(--sortie) 0.5s forwards;
+}
+
+.draw .drawing-cotes line { animation-delay: 2s; animation-duration: 1s; }
+
+.drawing-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--craie-douce);
+  opacity: 0;
+  animation: apparaitre 0.6s ease 2.6s forwards;
+}
+
+@keyframes tracer { to { stroke-dashoffset: 0; } }
+@keyframes apparaitre { to { opacity: 1; } }
+
+/* ---- Bandeau défilant des outils ---- */
+
+.marquee {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / -1;
+  margin: 0 calc(-1 * var(--marge));
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  background: rgba(20, 12, 80, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.marquee-piste {
+  display: flex;
+  width: max-content;
+  animation: defiler 28s linear infinite;
+}
+
+.marquee-piste .mono {
+  padding: 0.85rem 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  color: var(--craie-douce);
+  white-space: nowrap;
+}
+
+@keyframes defiler {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   Boutons
+   ========================================================================== */
+
+.btn {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.9rem 1.7rem;
+  border: 1px solid currentColor;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s var(--sortie), border-color 0.3s var(--sortie);
+}
+
+.btn span { position: relative; z-index: 1; }
+
+/* remplissage glissant au survol */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateY(101%);
+  transition: transform 0.35s var(--sortie);
+}
+
+.btn:hover::before { transform: translateY(0); }
+
+.hero .btn-solid {
+  background: var(--craie);
+  border-color: var(--craie);
+  color: var(--indigo);
+}
+
+.hero .btn-solid::before { background: var(--indigo); }
+
+.hero .btn-solid:hover { color: var(--craie); }
+
+.hero .btn-ghost { color: var(--craie); background: transparent; }
+
+.hero .btn-ghost::before { background: var(--craie); }
+
+.hero .btn-ghost:hover { color: var(--indigo); }
+
+.btn-envoyer {
+  background: var(--encre);
+  border-color: var(--encre);
+  color: var(--papier);
+  align-self: flex-start;
+}
+
+.btn-envoyer:hover { color: var(--craie); }
+
+.btn-envoyer::before { background: var(--bleu); }
+
+.btn-envoyer:hover { border-color: var(--bleu); }
+
+.btn-envoyer[disabled] { opacity: 0.55; cursor: wait; }
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+
+.section {
+  padding: clamp(4.5rem, 11vh, 8rem) var(--marge);
+}
+
+.section > * {
+  max-width: var(--largeur-max);
+  margin-inline: auto;
+}
+
+.section-sombre {
+  background: var(--papier-fonce);
+  border-top: 1px solid var(--filet);
+  border-bottom: 1px solid var(--filet);
+}
+
+.section-head { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+
+.section-eyebrow {
+  color: var(--bleu);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-weight: 750;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+.section-note {
+  margin-top: 0.9rem;
+  color: var(--beton);
+}
+
+.section-lead {
+  margin-top: 1.25rem;
+  max-width: 40rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--encre) 84%, var(--beton));
+}
+
+/* ==========================================================================
+   Réalisations — planches avec cartouche
+   ========================================================================== */
+
+.planches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1.5rem;
+}
+
+.planche {
+  position: relative;
+  border: 1px solid var(--encre);
+  background: var(--papier);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s var(--sortie), box-shadow 0.35s var(--sortie);
+}
+
+.planche:hover {
+  transform: translateY(-6px);
+  box-shadow: 8px 8px 0 0 color-mix(in srgb, var(--bleu) 28%, transparent);
+}
+
+.planche-visuel {
+  position: relative;
+  color: var(--beton);
+  padding: 1.5rem 1.5rem 0.75rem;
+  transition: background 0.35s var(--sortie), color 0.35s var(--sortie);
+}
+
+/* bascule « logo » au survol : dégradé bleu, traits blancs */
+.planche:hover .planche-visuel {
+  background: var(--degrade-logo);
+  color: var(--craie);
+}
+
+.planche-visuel svg { width: 100%; height: auto; display: block; }
+
+.planche-num {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.9rem;
+  font-size: 0.65rem;
+  color: inherit;
+  opacity: 0.7;
+}
+
+/* cartouche = bloc titre de plan technique */
+.cartouche {
+  margin-top: auto;
+  border-top: 1px solid var(--encre);
+  padding: 1rem 1.25rem 1.15rem;
+  background: var(--papier);
+}
+
+.cartouche-titre {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.7rem;
+  transition: color 0.25s;
+}
+
+.planche:hover .cartouche-titre { color: var(--bleu); }
+
+.cartouche-infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 1rem;
+}
+
+.cartouche-infos div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px dotted var(--filet);
+  padding-bottom: 0.2rem;
+}
+
+.cartouche-infos dt { color: var(--beton); }
+.cartouche-infos dd { text-align: right; }
+
+/* ==========================================================================
+   Livrables
+   ========================================================================== */
+
+.livrables {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1.75rem;
+}
+
+.livrable {
+  position: relative;
+  border-top: 2px solid var(--encre);
+  padding-top: 1.1rem;
+}
+
+.livrable::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--degrade-logo);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--sortie);
+}
+
+.livrable:hover::before { transform: scaleX(1); }
+
+.livrable h3 {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.livrable p {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--encre) 80%, var(--beton));
+}
+
+/* ==========================================================================
+   Processus
+   ========================================================================== */
+
+.services {
+  list-style: none;
+  counter-reset: service;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.75rem;
+}
+
+.service {
+  counter-increment: service;
+  position: relative;
+  border-top: 2px solid var(--encre);
+  padding-top: 1.1rem;
+}
+
+.service::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--degrade-logo);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--sortie);
+}
+
+.service:hover::before { transform: scaleX(1); }
+
+.service h3 {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.service h3::before {
+  content: counter(service, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--bleu);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.service p {
+  font-size: 0.95rem;
+  color: color-mix(in srgb, var(--encre) 80%, var(--beton));
+}
+
+/* ==========================================================================
+   Outils
+   ========================================================================== */
+
+.outils-groupes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.75rem;
+}
+
+.outils-groupe {
+  border: 1px solid var(--encre);
+  background: var(--papier);
+  padding: 1.5rem;
+  transition: transform 0.35s var(--sortie), box-shadow 0.35s var(--sortie);
+}
+
+.outils-groupe:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 0 color-mix(in srgb, var(--bleu) 24%, transparent);
+}
+
+.outils-label {
+  color: var(--bleu);
+  margin-bottom: 1rem;
+}
+
+.outils-liste {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.outils-liste li {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 650;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted var(--filet);
+}
+
+.outils-liste li:last-child { border-bottom: none; }
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+  max-width: var(--largeur-max);
+  margin-inline: auto;
+}
+
+.contact-texte {
+  margin-top: 1.25rem;
+  max-width: 28rem;
+  color: color-mix(in srgb, var(--encre) 82%, var(--beton));
+}
+
+.contact-coords {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contact-coords div {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px dotted var(--filet);
+  padding-bottom: 0.4rem;
+}
+
+.contact-coords dt { color: var(--beton); min-width: 6.5rem; }
+.contact-coords a { text-decoration: none; transition: color 0.2s; }
+.contact-coords a:hover { color: var(--bleu); text-decoration: underline; }
+
+/* ---- Formulaire ---- */
+
+.contact-form {
+  border: 1px solid var(--encre);
+  background: var(--surface);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-shadow: 10px 10px 0 0 color-mix(in srgb, var(--bleu) 16%, transparent);
+}
+
+.champ { display: flex; flex-direction: column; gap: 0.45rem; flex: 1; }
+
+.champ-rangee { display: flex; gap: 1.2rem; }
+
+.champ label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.optionnel { color: var(--beton); text-transform: none; letter-spacing: 0.04em; }
+
+.champ input,
+.champ select,
+.champ textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--encre);
+  background: var(--papier);
+  border: 1px solid var(--filet);
+  border-bottom: 2px solid var(--encre);
+  padding: 0.7rem 0.8rem;
+  border-radius: 0;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+
+.champ textarea { resize: vertical; min-height: 7rem; }
+
+.champ input:focus,
+.champ select:focus,
+.champ textarea:focus {
+  outline: none;
+  border-color: var(--bleu);
+  border-bottom-color: var(--bleu);
+  background: var(--surface);
+  box-shadow: 0 4px 12px -6px color-mix(in srgb, var(--bleu) 40%, transparent);
+}
+
+.champ input.invalide,
+.champ textarea.invalide { border-bottom-color: #A63232; }
+
+.form-statut {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  min-height: 1.2rem;
+}
+
+.form-statut.succes { color: #1F6B3A; }
+.form-statut.erreur { color: #A63232; }
+
+/* ==========================================================================
+   Pied de page
+   ========================================================================== */
+
+.footer {
+  padding: 2.5rem var(--marge) 2rem;
+  max-width: var(--largeur-max);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.cote-footer { margin: 0 0 1.5rem; }
+
+.footer-texte { color: var(--beton); }
+
+/* ==========================================================================
+   Apparition au défilement (décalage en cascade via JS)
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--sortie), transform 0.7s var(--sortie);
+  transition-delay: var(--delai, 0s);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   Réactivité
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    align-items: start;
+    min-height: auto;
+  }
+
+  .hero-inner { padding-bottom: 1rem; }
+
+  .hero-drawing { max-width: 30rem; margin-top: 1.5rem; }
+
+  .contact-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 960px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--papier);
+    border-bottom: 1px solid var(--filet);
+    display: none;
+  }
+
+  .nav-links.ouvert { display: flex; }
+
+  .nav-links a { padding: 1rem var(--marge); border-bottom: 1px solid var(--filet-grille); }
+
+  .nav-links a:not(.nav-cta)::after { content: none; }
+
+  .nav-links .nav-cta { border: none; }
+
+  .nav-burger { display: flex; }
+
+  .nav-burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+  .nav-burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+}
+
+@media (max-width: 720px) {
+  .cote-label { letter-spacing: 0.1em; font-size: 0.6rem; }
+
+  .champ-rangee { flex-direction: column; gap: 1.2rem; }
+}
+
+/* ==========================================================================
+   Mouvement réduit
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .anim, .anim-titre {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .draw line, .draw rect, .draw circle, .draw path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .drawing-label { animation: none; opacity: 1; }
+
+  .hero-grid-bg, .marquee-piste { animation: none; }
+
+  .reveal { opacity: 1; transform: none; transition: none; }
+
+  .planche, .btn, .btn::before, .outils-groupe { transition: none; }
+}
