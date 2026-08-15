@@ -34,10 +34,15 @@ rendu → retouche. Ton : réactif, rigoureux, délais tenus. Pas d'emoji.
   (en attente du nom de compte/repo)
 
 ## À faire
-- [ ] Vraies coordonnées (email, téléphone) — actuellement placeholders
 - [ ] Vérifier les infos des cartouches (outils/années inventés, à corriger par Ahmed)
-- [ ] Créer le repo GitHub côté client + ajouter la clé publique
-- [ ] Premier push une fois le remote connu
+- [ ] Ahmed doit : rendre le repo public + activer Pages (Settings → Pages →
+      branche gh-pages / root) → site sur https://ahmedhalfaoui.github.io/Portfolio/
+- [ ] Après chaque modif : push main PUIS `git push origin main:gh-pages`
+
+## Git (état au 2026-08-15)
+- Remote : git@github-ahmed-portfolio:ahmedhalfaoui/Portfolio.git (clé active ✓)
+- Branches poussées : main + gh-pages (Pages sert gh-pages)
+- Contact : uniquement via Formspree (plus d'email/téléphone affichés)
 
 ## Fait (2026-08-14, suite)
 - 6 vrais rendus intégrés (`assets/projets/`, sources dans ~/Downloads :

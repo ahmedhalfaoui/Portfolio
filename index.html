@@ -96,11 +96,11 @@
       <svg viewBox="0 0 660 480" fill="none" preserveAspectRatio="xMidYMax meet">
         <!-- trame, hachures et niveaux (fondu différé) -->
         <g class="drawing-sec" stroke="currentColor" stroke-width="0.8" opacity="0.55">
-          <!-- axes de trame A · B · C · D -->
-          <line x1="90" y1="92" x2="90" y2="430" stroke-dasharray="9 4 2 4"/>
-          <line x1="230" y1="92" x2="230" y2="430" stroke-dasharray="9 4 2 4"/>
-          <line x1="370" y1="92" x2="370" y2="430" stroke-dasharray="9 4 2 4"/>
-          <line x1="540" y1="92" x2="540" y2="430" stroke-dasharray="9 4 2 4"/>
+          <!-- axes de trame A · B · C · D (pointillés défilants) -->
+          <line class="axe" x1="90" y1="92" x2="90" y2="430" stroke-dasharray="9 4 2 4"/>
+          <line class="axe" x1="230" y1="92" x2="230" y2="430" stroke-dasharray="9 4 2 4"/>
+          <line class="axe" x1="370" y1="92" x2="370" y2="430" stroke-dasharray="9 4 2 4"/>
+          <line class="axe" x1="540" y1="92" x2="540" y2="430" stroke-dasharray="9 4 2 4"/>
           <circle cx="90" cy="78" r="11"/>
           <circle cx="230" cy="78" r="11"/>
           <circle cx="370" cy="78" r="11"/>
@@ -125,13 +125,13 @@
           <line x1="540" y1="400" x2="528" y2="412"/>
           <line x1="570" y1="400" x2="558" y2="412"/>
           <line x1="600" y1="400" x2="588" y2="412"/>
-          <!-- repères de niveaux -->
+          <!-- repères de niveaux (pulsation) -->
           <line x1="548" y1="400" x2="596" y2="400"/>
-          <path d="M 588 400 L 583 393 L 593 393 Z"/>
+          <path class="repere" d="M 588 400 L 583 393 L 593 393 Z"/>
           <line x1="548" y1="285" x2="596" y2="285"/>
-          <path d="M 588 285 L 583 278 L 593 278 Z"/>
+          <path class="repere" style="animation-delay: 0.8s" d="M 588 285 L 583 278 L 593 278 Z"/>
           <line x1="548" y1="170" x2="596" y2="170"/>
-          <path d="M 588 170 L 583 163 L 593 163 Z"/>
+          <path class="repere" style="animation-delay: 1.6s" d="M 588 170 L 583 163 L 593 163 Z"/>
           <!-- plancher intermédiaire (trait caché) -->
           <line x1="90" y1="285" x2="370" y2="285" stroke-dasharray="6 4"/>
           <!-- flèche du nord -->
@@ -173,9 +173,11 @@
           <line x1="433" y1="290" x2="433" y2="330"/>
           <line x1="476" y1="290" x2="476" y2="330"/>
           <line x1="385" y1="330" x2="525" y2="330"/>
-          <!-- arbre -->
-          <line x1="608" y1="400" x2="608" y2="340"/>
-          <circle cx="608" cy="316" r="24"/>
+          <!-- arbre (balancement) -->
+          <g class="arbre">
+            <line x1="608" y1="400" x2="608" y2="340"/>
+            <circle cx="608" cy="316" r="24"/>
+          </g>
 
           <!-- chaînes de cotes -->
           <g class="drawing-cotes" stroke-width="1">
@@ -200,6 +202,17 @@
             <line x1="45" y1="400" x2="55" y2="400"/>
           </g>
         </g>
+
+        <!-- fenêtres qui s'éclairent tour à tour -->
+        <g class="lueurs" fill="currentColor" aria-hidden="true">
+          <rect class="lueur" x="118" y="198" width="54" height="54"/>
+          <rect class="lueur" style="animation-delay: 1.8s" x="208" y="198" width="54" height="54"/>
+          <rect class="lueur" style="animation-delay: 3.6s" x="118" y="313" width="54" height="54"/>
+          <rect class="lueur" style="animation-delay: 2.7s" x="393" y="293" width="124" height="34"/>
+        </g>
+
+        <!-- ligne de balayage façon table traçante -->
+        <rect class="balayage" x="80" y="96" width="2.5" height="316" fill="currentColor"/>
 
         <!-- chiffres et annotations -->
         <text class="drawing-label mono" x="90" y="82" text-anchor="middle">A</text>
@@ -453,7 +466,7 @@
           je vous réponds rapidement, même sur des délais serrés.
         </p>
         <dl class="contact-coords mono">
-          <div><dt>Studio</dt><dd>Tunis</dd></div>
+          <div><dt>Studio</dt><dd>Lille, France</dd></div>
           <div><dt>Réponse</dt><dd>Sous 48 h via le formulaire</dd></div>
         </dl>
       </div>

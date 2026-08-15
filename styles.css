@@ -449,6 +449,59 @@ a { color: inherit; }
 
 @keyframes apparaitre-sec { to { opacity: 0.55; } }
 
+/* ---- Le plan vit : animations en boucle ---- */
+
+/* pointillés des axes qui défilent lentement */
+.axe { animation: defiler-axe 2.8s linear infinite; }
+
+@keyframes defiler-axe { to { stroke-dashoffset: -19; } }
+
+/* repères de niveau qui pulsent */
+.repere { animation: pulser-repere 2.6s ease-in-out infinite; }
+
+@keyframes pulser-repere {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* fenêtres qui s'éclairent tour à tour */
+.lueur {
+  opacity: 0;
+  animation: lueur-fenetre 7s ease-in-out 3s infinite;
+}
+
+@keyframes lueur-fenetre {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.16; }
+}
+
+/* balayage vertical façon table traçante */
+.balayage {
+  opacity: 0;
+  filter: drop-shadow(0 0 6px currentColor);
+  animation: balayer 8s linear 3.2s infinite;
+}
+
+@keyframes balayer {
+  0% { transform: translateX(0); opacity: 0; }
+  6% { opacity: 0.65; }
+  46% { opacity: 0.65; }
+  52% { transform: translateX(460px); opacity: 0; }
+  100% { transform: translateX(460px); opacity: 0; }
+}
+
+/* arbre qui ondule doucement */
+.arbre {
+  transform-box: view-box;
+  transform-origin: 608px 400px;
+  animation: balancer 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes balancer {
+  from { transform: rotate(-1.3deg); }
+  to   { transform: rotate(1.5deg); }
+}
+
 @keyframes tracer { to { stroke-dashoffset: 0; } }
 @keyframes apparaitre { to { opacity: 1; } }
 
@@ -1398,6 +1451,10 @@ a { color: inherit; }
   .drawing-label { animation: none; opacity: 1; }
 
   .drawing-sec { animation: none; opacity: 0.55; }
+
+  .axe, .repere, .arbre { animation: none; }
+
+  .lueur, .balayage { animation: none; opacity: 0; }
 
   .hero-grid-bg, .marquee-piste { animation: none; }
 
