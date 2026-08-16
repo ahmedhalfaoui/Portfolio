@@ -90,6 +90,26 @@ a { color: inherit; }
 .mask { display: block; overflow: hidden; }
 
 /* ==========================================================================
+   Bascule de thème — fondu global via l'API View Transitions
+   ========================================================================== */
+
+/* cross-fade unique de toute la page, composé par le GPU */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  mix-blend-mode: normal;
+}
+
+/* pendant le changement de thème, on coupe les transitions par élément
+   pour éviter le patchwork de fondus désynchronisés */
+.changement-theme *,
+.changement-theme *::before,
+.changement-theme *::after {
+  transition: none !important;
+}
+
+/* ==========================================================================
    Barre de progression de lecture
    ========================================================================== */
 
@@ -222,19 +242,19 @@ a { color: inherit; }
 .theme-toggle {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   background: none;
-  border: 1px solid var(--filet);
+  border: none;
+  border-radius: 50%;
   color: var(--encre);
   cursor: pointer;
-  transition: border-color 0.25s, color 0.25s, transform 0.25s var(--sortie);
+  transition: color 0.25s, background 0.25s;
 }
 
 .theme-toggle:hover {
-  border-color: var(--bleu);
   color: var(--bleu);
-  transform: rotate(15deg);
+  background: color-mix(in srgb, var(--bleu) 10%, transparent);
 }
 
 .theme-toggle svg { width: 18px; height: 18px; }
@@ -1436,6 +1456,9 @@ a { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
 
   .anim, .anim-titre {
     animation: none;

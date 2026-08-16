@@ -12,17 +12,36 @@
   if (annee) annee.textContent = String(new Date().getFullYear());
 
   // ---- Bascule clair / sombre ----
+  // Le changement passe par l'API View Transitions quand elle existe :
+  // un seul fondu de page composé par le GPU, au lieu de dizaines de
+  // transitions CSS désynchronisées.
   var toggle = document.querySelector(".theme-toggle");
   if (toggle) {
     toggle.addEventListener("click", function () {
       var racine = document.documentElement;
       var suivant = racine.dataset.theme === "sombre" ? "clair" : "sombre";
-      racine.dataset.theme = suivant;
-      localStorage.setItem("theme", suivant);
-      toggle.setAttribute(
-        "aria-label",
-        suivant === "sombre" ? "Basculer en mode clair" : "Basculer en mode sombre"
-      );
+
+      var appliquer = function () {
+        racine.dataset.theme = suivant;
+        localStorage.setItem("theme", suivant);
+        toggle.setAttribute(
+          "aria-label",
+          suivant === "sombre" ? "Basculer en mode clair" : "Basculer en mode sombre"
+        );
+      };
+
+      var retirer = function () {
+        racine.classList.remove("changement-theme");
+      };
+
+      racine.classList.add("changement-theme");
+
+      if (document.startViewTransition && !prefereReduit) {
+        document.startViewTransition(appliquer).finished.finally(retirer);
+      } else {
+        appliquer();
+        setTimeout(retirer, 60);
+      }
     });
   }
 
